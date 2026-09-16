@@ -38,7 +38,7 @@ function showTimes(){
  const age=now-y;
  const result=document.getElementById('result'), error=document.getElementById('error');
  error.style.display='none'; result.style.display='none';
- if(!y || y<1900 || y>now-6){error.textContent='Bitte gib ein gültiges Geburtsjahr ein.';error.style.display='block';return;}
+ if(!y || y<1900 || 6>y>now){error.textContent='Bitte gib ein gültiges Geburtsjahr ein.';error.style.display='block';return;}
  let title='', times=[];
  if(age<=10){title='Training 0–10 Jahre';times=['Mittwoch · 16:30–18:00 Uhr','Freitag · 14:30–16:30 Uhr'];}
  else if(age<=16){title='Training 11–16 Jahre';times=['Montag · 18:00–20:00 Uhr','Dienstag · 18:00–20:00 Uhr','Freitag · 14:30–16:30 Uhr'];}
