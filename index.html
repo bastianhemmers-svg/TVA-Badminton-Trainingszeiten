@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TV Augsburg Badminton – Trainingszeiten</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#10233f}
+.wrap{max-width:520px;margin:auto;padding:28px 18px}
+.card{background:white;border-radius:22px;padding:28px;box-shadow:0 8px 30px #00000012}
+.logo{font-size:15px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+h1{font-size:30px;margin:10px 0 8px}.sub{color:#60708a;line-height:1.5}
+label{display:block;font-weight:700;margin:24px 0 8px}
+input{width:100%;padding:15px;border:2px solid #d9e1ec;border-radius:12px;font-size:18px}
+button{width:100%;margin-top:14px;padding:15px;border:0;border-radius:12px;background:#1457c5;color:white;font-size:17px;font-weight:700}
+button:hover{background:#0f48a5}.result{display:none;margin-top:24px}.group{padding:18px;background:#eef4ff;border-radius:16px;margin-top:12px}
+.group h2{font-size:19px;margin:0 0 10px}.time{font-size:16px;line-height:1.7}
+.note{font-size:13px;color:#64748b;margin-top:20px}
+.error{color:#b42318;font-weight:600;margin-top:12px;display:none}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<div class="logo">TV Augsburg 1847 e.V. · Badminton</div>
+<h1>Trainingszeiten finden</h1>
+<p class="sub">Gib dein Geburtsjahr ein. Wir zeigen dir die passende Trainingsgruppe.</p>
+<label for="year">Geburtsjahr</label>
+<input id="year" type="number" inputmode="numeric" min="1900" max="2100" placeholder="z. B. 2012">
+<button onclick="showTimes()">Trainingszeiten anzeigen</button>
+<div id="error" class="error"></div>
+<div id="result" class="result"></div>
+<p class="note">Die angezeigten Zeiten entsprechen den aktuell hinterlegten Trainingszeiten. Änderungen können später direkt in der Webseite vorgenommen werden.</p>
+</div></div>
+<script>
+function showTimes(){
+ const y=Number(document.getElementById('year').value);
+ const now=new Date().getFullYear();
+ const age=now-y;
+ const result=document.getElementById('result'), error=document.getElementById('error');
+ error.style.display='none'; result.style.display='none';
+ if(!y || y<1900 || y>now){error.textContent='Bitte gib ein gültiges Geburtsjahr ein.';error.style.display='block';return;}
+ let title='', times=[];
+ if(age<=10){title='Training 0–10 Jahre';times=['Mittwoch · 16:30–18:00 Uhr','Freitag · 14:30–16:30 Uhr'];}
+ else if(age<=16){title='Training 11–16 Jahre';times=['Montag · 18:00–20:00 Uhr','Dienstag · 18:00–20:00 Uhr','Freitag · 14:30–16:30 Uhr'];}
+ else {title='Training ab 16 Jahren';times=['Dienstag · 20:00–22:00 Uhr','Donnerstag · ab 20:30 Uhr · offenes Ende'];}
+ result.innerHTML='<h2>Passende Trainingszeiten</h2><div class="group"><h2>'+title+'</h2><div class="time">'+times.join('<br>')+'</div></div>';
+ result.style.display='block';
+}
+document.getElementById('year').addEventListener('keydown',e=>{if(e.key==='Enter')showTimes()});
+</script>
+</body>
+</html>
